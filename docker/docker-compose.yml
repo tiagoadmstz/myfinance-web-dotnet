@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    env_file:
+      - docker.env
+    volumes:
+      - ../../myfinance-web-dotnet/:/home/myfinance-web-dotnet/:rw
+    expose:
+      - 5000
+      - 8080
+    ports:
+      - "8080:8080"
+      - "5000:5000"
+
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.mssql
+    container_name: mssql
+    env_file:
+      - ./mssql.env
+    volumes:
+      - ./mssql/data/:/var/opt/mssql/data/:rw
+    ports:
+      - "1433:1433"
+      - "1434:1434"
