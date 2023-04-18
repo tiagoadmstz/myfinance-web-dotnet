@@ -12,7 +12,8 @@ services:
       - 8080
     ports:
       - "8080:8080"
-      - "5000:5000"
+    depends_on:
+      - db
 
   db:
     build:
@@ -25,4 +26,3 @@ services:
       - ./mssql/data/:/var/opt/mssql/data/:rw
     ports:
       - "1433:1433"
-      - "1434:1434"

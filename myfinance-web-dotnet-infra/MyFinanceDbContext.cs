@@ -11,7 +11,10 @@ namespace myfinance_web_dotnet_infra
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-          optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=myfinance;Trusted_Connection=True;");
+          if (!optionsBuilder.IsConfigured)
+          {
+              optionsBuilder.UseSqlServer(@"Data Source=db,1433;Initial Catalog=myfinance;User Id=sa;Password=S3cr3t##8100;Integrated Security=false;TrustServerCertificate=true;");
+          }
         }
     }
 }
